@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block title %}
+To-do List
+{% endblock %}
+
+{% block content %}
+
+	{% if messages %}
+	{% for message in messages %}
+			<div class="alert alert-warning alert-dismissable" role="alert">
+				<button class="close" data-dismiss="alert">
+					<small><sup>x</sub></small>
+				</button>
+				{{ message }}
+			</div>
+	{% endfor %}
+	{% endif %}
+			<br>
+
+			<h1>Lista rzeczy do zrobienia:</h1>
+			<table class="table table-bordered">
+				{% for thing in all_ithem %}
+				{% if thing.complited == False %}
+				<tr>
+					<td><a href="{% url 'edycja' thing.id %}">{{ thing.ithem }}</a></td>
+					<td><center><a href="{% url 'wykonanie' thing.id %}"><button type="button" class="btn btn-primary">Do zrobienia</button></a></center></td>
+					<td><center><a href="{% url 'delete' thing.id %}"><button type="button" class="btn btn-danger">Skasuj</button></a></center></td>
+				</tr>
+				{% else %}
+				<tr class="table-secondary">
+					<td class="striker"><a href="{% url 'edycja' thing.id %}">{{ thing.ithem }}</a></td>
+					<td><center><a href="{% url 'do_wykonania' thing.id %}"><button type="button" class="btn btn-secondary">Zrobione</button></a></center></td>
+					<td><center><a href="{% url 'delete' thing.id %}"><button type="button" class="btn btn-danger">Skasuj</button></a></center></td>
+				</tr>
+				{% endif %}
+				{% endfor %}
+			</table>
+
+
+{% endblock %}

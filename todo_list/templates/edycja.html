@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}
+To-do List | Edycja pozycji
+{% endblock %}
+
+{% block content %}
+
+{% if ithem %}
+				<form class="form-inline my-2 my-lg-0" method="POST">
+					{% csrf_token %}
+					<input class="form-control mr-sm-2" type="search" placeholder="{{ ithem.ithem }}" value="{{ ithem.ithem }}" aria-label="Search" name = "ithem">
+					<input type="hidden" value="{{ ithem.complited }}" name="complited">
+					<button class="btn btn-outline-secondary my-2 my-sm-0" type="submit">Zmień</button>
+				</form>
+{% endif %}
+{% endblock %}
